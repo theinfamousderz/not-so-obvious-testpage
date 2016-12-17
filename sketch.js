@@ -1,31 +1,40 @@
-//thanks to https://www.youtube.com/watch?v=KWoJgHFYWxY
 
-var n = 0;
-var c = 3;
-var colour = 0;
-var colourSlider;
+var rSlider;
+var gSlider;
+var bSlider;
+var sizeSlider;
+var button;
+
 function setup() {
-	createCanvas(600, 600);
+	createCanvas(800, 600);
 	background(25);
-	angleMode(DEGREES);
-	colorMode(HSB);
-	colourSlider = createSlider(50, 400, 120);
-	colourSlider.position(20, 20);
-	frameRate(60);
+	rSlider = createSlider(0, 255, 100);
+  	rSlider.position(20, 20);
+  	gSlider = createSlider(0, 255, 0);
+  	gSlider.position(20, 50);
+  	bSlider = createSlider(0, 255, 255);
+  	bSlider.position(20, 80);
+  	sizeSlider = createSlider(5, 50, 20);
+  	sizeSlider.position(20, 110);
+  	button = createButton('Clear');
+  	button.position(60, 140);
+  	button.mousePressed(clearBoard);
+	frameRate(120);
 }
-
 function draw() {
-	
-	colour = colourSlider.value();
-
-	var a = n * 137.5;
-	var r = c * sqrt(n);
-
-	var x = r * cos(a) + width/2;
-	var y = r * sin(a) + height/2;
-	noStroke();
-	fill(colour, colour, colour);
-	ellipse(x, y, 4 ,4);
-	n++;
+	var r = rSlider.value();
+  	var g = gSlider.value();
+  	var b = bSlider.value();
+  	var size = sizeSlider.value();
+  	noStroke();
+  	fill(25);
+  	rect(0, 0,size*2, size*2);
+  	fill(r, g, b);
+	ellipse(0+size,0+size, size, size);
+	if(mouseIsPressed)
+		ellipse(mouseX, mouseY, size, size);
 }
 
+function clearBoard(){
+	background(25);
+}
